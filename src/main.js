@@ -20,8 +20,8 @@ appRoot.innerHTML = `
     </div>
 
     <main class="stage" aria-label="Birthday stage with penguins">
-      <div class="penguin left" aria-label="Left penguin" role="img"><img src="public/penguin.png"/></div>
-      <div class="penguin right" aria-label="Right penguin" role="img"><img src="public/penguin.png"/></div>
+      <div class="penguin left" aria-label="Left penguin" role="img"><img src="/penguin.png"/></div>
+      <div class="penguin right" aria-label="Right penguin" role="img"><img src="/penguin.png"/></div>
       <h1 class="headline">Happy 23rd
       <br>My Chloè-Kous!!!</br></h1>
     </main>
