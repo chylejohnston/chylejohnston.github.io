@@ -41,7 +41,9 @@
   
   #app {
     max-width: none;
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -117,6 +119,24 @@
     transform: translateX(-50%);
     font-size: clamp(2rem, 4vw, 4rem);
     text-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    transform-origin: top center;
+    animation: headline-pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes headline-pulse {
+    0%, 100% {
+      scale: 1;
+      transform: translateX(-100%);
+    }
+    25%, 75% {
+      scale: 1.25;
+      transform: translateX(-50);
+    }
+
+    50% {
+      scale: 1;
+      transform: translateX(0);
+    }
   }
 
   /* Marquee */
@@ -187,12 +207,37 @@
     z-index: 20;
   }
 
+  /* Random text placement */
+  .random-text {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9;
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+    transform-origin: center;
+  }
+
   .penguin {
     position: absolute;
     bottom: 10vh;
     font-size: clamp(48px, 10vw, 120px);
     filter: drop-shadow(0 8px 16px rgba(0,0,0,0.35));
     transform-origin: bottom center;
+  }
+
+  /* Support img penguins */
+  .penguin img {
+    height: 200px;
+    width: 100px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .penguin.right img {
+    transform: scaleX(-1);
   }
 
   .penguin img {
@@ -235,6 +280,50 @@
     75% { transform: rotate(-20deg); }
     87.5% { transform: rotate(20deg); }
     100% { right: 40%; transform: rotate(0deg); }
+  }
+
+  /* Mobile adjustments: keep penguins farther apart and scale down */
+  @media (max-width: 600px) {
+    .penguin {
+      font-size: clamp(40px, 18vw, 96px);
+    }
+
+    .penguin img {
+      height: 140px;
+      width: 70px;
+    }
+
+    .penguin.left {
+      animation: slide-in-left-sm 6s ease-in-out forwards, meet-bounce 2s ease-in-out 6s infinite;
+    }
+
+    .penguin.right {
+      animation: slide-in-right-sm 6s ease-in-out forwards, meet-bounce 2s ease-in-out 6s infinite;
+    }
+
+    @keyframes slide-in-left-sm {
+      0% { left: -50%; transform: rotate(20deg); }
+      12.5% { transform: rotate(-20deg); }
+      25% { transform: rotate(20deg); }
+      37.5% { transform: rotate(-20deg); }
+      50% { transform: rotate(20deg); }
+      62.5% { transform: rotate(-20deg); }
+      75% { transform: rotate(20deg); }
+      87.5% { transform: rotate(-20deg); }
+      100% { left: 30%; transform: rotate(0deg); }
+    }
+
+    @keyframes slide-in-right-sm {
+      0% { right: -50%; transform: rotate(-20deg); }
+      12.5% { transform: rotate(20deg); }
+      25% { transform: rotate(-20deg); }
+      37.5% { transform: rotate(20deg); }
+      50% { transform: rotate(-20deg); }
+      62.5% { transform: rotate(20deg); }
+      75% { transform: rotate(-20deg); }
+      87.5% { transform: rotate(20deg); }
+      100% { right: 30%; transform: rotate(0deg); }
+    }
   }
 
   @keyframes meet-bounce {
